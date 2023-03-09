@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.5.3</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.code.glancer.interview.schedular</groupId>
+	<artifactId>interview-schedular</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>interview-schedular</name>
+	<description>This is a springboot application to manage the interview process</description>
+	<properties>
+		<java.version>1.8</java.version>
+		<mapstruct-version>1.4.2.Final</mapstruct-version>
+		<jsoe.jwt.version>8.17.1</jsoe.jwt.version>
+		<hash.id.version>1.0.3</hash.id.version>
+		<log.path>/target/log4j/</log.path>
+		<springfox-swagger2.version>2.9.2</springfox-swagger2.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.biweekly</groupId>
+			<artifactId>biweekly</artifactId>
+			<version>0.6.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>${mapstruct-version}</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<forceJavacCompilerUse>true</forceJavacCompilerUse>
+					<compilerArgs>
+						<arg>-parameters</arg>
+						<arg>-Amapstruct.defaultComponentModel=spring</arg>
+						<arg>-Amapstruct.unmappedTargetPolicy=IGNORE</arg>
+					</compilerArgs>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>${lombok.version}</version>
+						</path>
+						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>${mapstruct-version}</version>
+						</path>
+						<!-- other annotation processors -->
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>io.snyk</groupId>
+				<artifactId>snyk-maven-plugin</artifactId>
+				<version>2.0.0</version>
+				<inherited>false</inherited>
+				<executions>
+					<execution>
+						<id>snyk-test</id>
+						<goals>
+							<goal>test</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>snyk-monitor</id>
+						<goals>
+							<goal>monitor</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<apiToken>${env.SNYK_TOKEN}</apiToken>
+					<args>
+						<arg>--all-projects</arg>
+					</args>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

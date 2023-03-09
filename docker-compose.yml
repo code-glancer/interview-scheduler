@@ -1,0 +1,16 @@
+version: '3.2'
+services:
+  localstack:
+    image: localstack/localstack:latest
+    container_name: localstack_dev1
+    ports:
+      - '4567-4597:4567-4597'
+      - '${PORT_WEB_UI-8090}:${PORT_WEB_UI-8090}'
+    environment:
+      - SERVICES=s3
+      - DEFAULT_REGION=ap-south-1
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - DEBUG=1
+    volumes:
+      - "${TMPDIR:-/tmp/localstack}:/tmp/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"

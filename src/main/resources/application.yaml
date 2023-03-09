@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: interview-schedular
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/codeglancer?currentSchema=interview&reWriteBatchedInserts=true
+    username: postgres
+    password: admin
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        format_sql: false
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: info.yestrade@gmail.com
+    password: jprnpucwbrfemmbz
+    smtp:
+      connectiontimeout: 5000
+      timeout: 5000
+      writetimeout: 5000
+      auth: true
+      starttls:
+        enable: true
+      ssl:
+        enable: false
+    debug: true
+server:
+  port: 8081
