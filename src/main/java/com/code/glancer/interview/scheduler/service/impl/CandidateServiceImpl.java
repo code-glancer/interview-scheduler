@@ -2,10 +2,12 @@ package com.code.glancer.interview.scheduler.service.impl;
 
 import com.code.glancer.interview.scheduler.domain.Candidate;
 import com.code.glancer.interview.scheduler.dto.CandidateDto;
+import com.code.glancer.interview.scheduler.exception.ResourceNotFoundException;
 import com.code.glancer.interview.scheduler.mapper.CandidateMapper;
 import com.code.glancer.interview.scheduler.repository.CandidateRepository;
 import com.code.glancer.interview.scheduler.service.CandidateService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -26,14 +28,14 @@ public class CandidateServiceImpl implements CandidateService {
 
     @Override
     public CandidateDto getCandidate(String email) {
-        Candidate candidate = candidateRepository.findByEmail(email);
+        Candidate candidate = candidateRepository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("Candidate not found", HttpStatus.NOT_FOUND));
         CandidateDto candidateDto = candidateMapper.toCandidateDto(candidate);
         return candidateDto;
     }
 
     @Override
     public Candidate findCandidateByEmail(String email) {
-        Candidate candidate = candidateRepository.findByEmail(email);
+        Candidate candidate = candidateRepository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("Candidate not found", HttpStatus.NOT_FOUND));
         return candidate;
     }
 }

@@ -15,6 +15,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.Optional;
+
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -53,7 +55,7 @@ public class CandidateServiceTest {
         Candidate expectedCandidate = getCandidate();
 
         // when
-        Mockito.when(candidateRepository.findByEmail(Mockito.anyString())).thenReturn(expectedCandidate);
+        Mockito.when(candidateRepository.findByEmail(Mockito.anyString())).thenReturn(Optional.of(expectedCandidate));
         // to be tested
         Candidate resultantCandidate = underTestService.findCandidateByEmail("contact.rohan@codeglancer.com");
         /// assertion

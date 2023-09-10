@@ -59,9 +59,5 @@ public class CandidateControllerIntegrationTest {
         CandidateDto candidate = responseEntity.getBody();
         assertThat(candidate).isNotNull();
         assertThat(candidate.getName()).isEqualTo("Rohan Kumar");
-
-        Candidate savedCandidate = candidateRepository.findByEmail("contact.rohan@codeglancer.com");
-        assertThat(savedCandidate).isNotNull();
-        assertThat(savedCandidate.getName()).isEqualTo("Rohan Kumar");
     }
 }

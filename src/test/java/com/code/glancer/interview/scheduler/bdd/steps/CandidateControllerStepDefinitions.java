@@ -10,8 +10,10 @@ import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -21,7 +23,6 @@ public class CandidateControllerStepDefinitions {
 
     @Autowired
     private RestTemplate restTemplate = new RestTemplate();
-    ;
     private HttpHeaders headers;
     private ResponseEntity<String> responseEntity;
     private ObjectMapper objectMapper = new ObjectMapper();
@@ -61,9 +62,10 @@ public class CandidateControllerStepDefinitions {
 
 
     @Then("the response status code should be {int}")
-    public void theResponseShouldContainTheFollowingJSON(int statusCode) {
+    public void theResponseShouldContainTheFollowingJSON(int expectedStatusCode) {
 
-
+        HttpStatus actualStatusCode = responseEntity.getStatusCode();
+        Assert.assertEquals(expectedStatusCode, actualStatusCode.value());
     }
 
     @Then("the response should contain the following JSON:")
@@ -86,6 +88,26 @@ public class CandidateControllerStepDefinitions {
             throw new RuntimeException("Failed to parse JSON request body", e);
         }
         return candidateDto;
+    }
+
+
+    @Given("no candidate with email {string} exists")
+    public void noCandidateWithEmailExists(String email) {
+        // Ensure that no candidate with the provided email exists in your system
+        // You may perform any necessary steps to make sure the candidate does not exist
+    }
+
+    @When("a GET request is made to {string}")
+    public void aGETRequestIsMadeTo(String endpoint) {
+        String url = "http://localhost:8081" + endpoint;
+
+        try {
+            responseEntity = restTemplate.getForEntity(url, String.class);
+        } catch (HttpClientErrorException.NotFound ex) {
+            HttpStatus statusCode = ex.getStatusCode();
+            String responseBody = ex.getResponseBodyAsString();
+            responseEntity = new ResponseEntity<>(responseBody, statusCode);
+        }
     }
 
 }

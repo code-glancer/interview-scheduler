@@ -32,3 +32,9 @@ Feature: Candidate Controller API
       }
       """
 
+  Scenario: Get Candidate by Email (Not Found)
+    Given the candidate API is available
+    And no candidate with email "nonexistent@example.com" exists
+    When a GET request is made to "/candidates/nonexistent@example.com"
+    Then the response status code should be 404
+
