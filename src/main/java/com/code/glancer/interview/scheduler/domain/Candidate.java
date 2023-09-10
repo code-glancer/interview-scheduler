@@ -28,5 +28,4 @@ public class Candidate {
     private String location;
     private String notice;
     private String resumeUrl;
-
 }

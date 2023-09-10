@@ -26,7 +26,7 @@ public class CandidateController {
         return new ResponseEntity<>(candidate, HttpStatus.CREATED);
     }
 
-    @GetMapping("{email}")
+    @GetMapping("/{email}")
     public HttpEntity<CandidateDto> getCandidate(@PathVariable String email) {
         CandidateDto candidate = candidateService.getCandidate(email);
         return new ResponseEntity<>(candidate, HttpStatus.OK);

@@ -1,6 +1,6 @@
 spring:
   application:
-    name: interview-schedular
+    name: interview-scheduler
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/codeglancer?currentSchema=interview&reWriteBatchedInserts=true
@@ -17,8 +17,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: info.yestrade@gmail.com
-    password: jprnpucwbrfemmbz
+    username: ${GMAILD_USER_NAME}
+    password: ${GMAILD_API_PASS}
     smtp:
       connectiontimeout: 5000
       timeout: 5000

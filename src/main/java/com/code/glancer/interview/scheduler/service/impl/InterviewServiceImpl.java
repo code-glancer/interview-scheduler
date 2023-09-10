@@ -37,7 +37,7 @@ public class InterviewServiceImpl implements InterviewService {
         interviewRepository.save(interview);
         EmailDto emailDto = composeEmail(interview);
         CalenderDto calenderDto = composeCalender(interview);
-        emailService.sendEmail(emailDto);
+       // emailService.sendEmail(emailDto);
         try {
             emailService.sendCalenderInvite(calenderDto);
         } catch (IOException e) {

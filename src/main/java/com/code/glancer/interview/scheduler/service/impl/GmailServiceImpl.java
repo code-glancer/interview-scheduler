@@ -3,7 +3,6 @@ package com.code.glancer.interview.scheduler.service.impl;
 import biweekly.Biweekly;
 import biweekly.ICalendar;
 import biweekly.component.VEvent;
-import biweekly.parameter.ParticipationLevel;
 import biweekly.property.Attendee;
 import biweekly.property.Method;
 import biweekly.util.Duration;

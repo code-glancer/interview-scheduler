@@ -3,7 +3,6 @@ package com.code.glancer.interview.scheduler.service.impl;
 import com.code.glancer.interview.scheduler.domain.Candidate;
 import com.code.glancer.interview.scheduler.dto.CandidateDto;
 import com.code.glancer.interview.scheduler.mapper.CandidateMapper;
-import com.code.glancer.interview.scheduler.mapper.CandidateMapperImpl;
 import com.code.glancer.interview.scheduler.repository.CandidateRepository;
 import com.code.glancer.interview.scheduler.service.CandidateService;
 import org.springframework.beans.factory.annotation.Autowired;
