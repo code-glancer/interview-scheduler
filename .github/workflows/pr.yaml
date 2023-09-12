@@ -23,5 +23,7 @@ jobs:
         env:
           GMAILD_USER_NAME: ${{ secrets.GMAILD_USER_NAME }}
           GMAILD_API_PASS: ${{ secrets.GMAILD_API_PASS }}
+        run: |
+          echo "GMAILD_USER_NAME: $GMAILD_USER_NAME"
       - name: Build with Maven
         run: mvn clean install
