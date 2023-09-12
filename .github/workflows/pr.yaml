@@ -25,5 +25,11 @@ jobs:
           GMAILD_API_PASS: ${{ secrets.GMAILD_API_PASS }}
         run: |
           echo "GMAILD_USER_NAME: $GMAILD_USER_NAME"
+          echo "GMAILD_API_PASS: GMAILD_API_PASS"
+      - name: Inject secrets into application.yaml
+        run: |
+          sed -i 's/${GMAILD_USER_NAME}/'"$GMAILD_USER_NAME"'/g' src/main/resources/application.yaml
+          sed -i 's/${GMAILD_API_PASS}/'"$GMAILD_API_PASS"'/g' src/main/resources/application.yaml
+
       - name: Build with Maven
         run: mvn clean install
